@@ -7,58 +7,84 @@ import useLocalStorage from "./customHooks/useLocalStorage";
 import jwt from "jsonwebtoken";
 
 import pickFixApi from "./api";
+
+import UserContext from "./userContext";
+
 function App() {
+  const [infoLoaded, setInfoLoaded] = useState(false);
+
   const [token, setToken] = useLocalStorage("token");
   const [currentUser, setCurrentUser] = useState(null);
 
-
-  
-  useEffect(
-    function mountUser(){
-      if(token){
-        console.log("if token:", token)
-        let {email}= jwt.decode(token);
-        pickFixApi.token = token;
-        
-        console.log("in mountUser api token: ",pickFixApi.token)
-
-        
+  useEffect(() => {
+ 
+    async function mountUser() {
+      if (token) {
+        console.log("token found:", token);
+        console.log("token found decoded:", jwt.decode(token));
+      
+        try {
+          let { id, userType } = jwt.decode(token);
+          pickFixApi.token = token;
+          let currentUser = await pickFixApi.getCurrentUser(id, userType);
+          currentUser["userType"]=userType;
+          console.log(`in useeffect,currentuser:`,currentUser)
+          console.log(`in api,token:`,pickFixApi.token)
+          
+          setCurrentUser(currentUser);
+        } catch (err) {
+          console.error("Problem loading current user", err);
+          setCurrentUser(null);
+        }
+      } else {
+        console.log("no token found");
       }
-      else{
-        console.log("no token")
-      }
+      setInfoLoaded(true);
+
     }
-  )
+    setInfoLoaded(false);
+    mountUser();
+   
+  }, [token]);
 
-  async function signUp(data){
-    try{
-      let res= await pickFixApi.signUp(data);
+  async function signUp(data) {
+    try {
+      let res = await pickFixApi.signUp(data);
       setToken(res);
-      return {success:true};
-    }
-    catch(err){
-      return{success:false,err}
+      return { success: true };
+    } catch (err) {
+      return { success: false, err };
     }
   }
-  async function logIn(data){
-    try{
-      let res= await pickFixApi.logIn(data);
+  async function logIn(data) {
+    try {
+      let res = await pickFixApi.logIn(data);
 
       setToken(res);
-      return {success:true};
-    }
-    catch(err){
-      return{success:false,err}
+      console.log(token);
+
+      return { success: true, res:res };
+    } catch (err) {
+      return { success: false, err };
     }
   }
 
+  function logOut() {
+    setCurrentUser(null);
+    setToken(null);
+  }
+
+  if (!infoLoaded) return (<div> loading</div>)
 
   return (
     <BrowserRouter>
-      <Navbar/>
-      <Routes signUp={signUp} logIn={logIn} />
+      <UserContext.Provider value={{ currentUser,setCurrentUser }}>
+        <div>
+          <Navbar logOut={logOut} />
+          <Routes signUp={signUp} logIn={logIn} />
+        </div>
+      </UserContext.Provider>
     </BrowserRouter>
-
   );
 }
 
