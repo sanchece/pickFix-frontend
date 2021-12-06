@@ -27,7 +27,6 @@ const SignUpForm = ({ signUp }) => {
     setSignUpData((data) => ({ ...data, [name]: value }));
   }
 
- 
   return (
     <form onSubmit={handleSubmit} >
       {Object.keys(signUpData).map((key, i) => {
@@ -37,8 +36,6 @@ const SignUpForm = ({ signUp }) => {
               <label>{capitalizeFirstLetter(key)}</label>
               <input
                 id={`${key}`}
-                
-                
                 name={`${key}`}
                 value={signUpData[key]}
                   onChange={handleChange}

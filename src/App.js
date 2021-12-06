@@ -20,17 +20,14 @@ function App() {
  
     async function mountUser() {
       if (token) {
-        console.log("token found:", token);
-        console.log("token found decoded:", jwt.decode(token));
-      
+        console.log("token found & decoded:", jwt.decode(token));
+  
         try {
           let { id, userType } = jwt.decode(token);
           pickFixApi.token = token;
           let currentUser = await pickFixApi.getCurrentUser(id, userType);
           currentUser["userType"]=userType;
-          console.log(`in useeffect,currentuser:`,currentUser)
-          console.log(`in api,token:`,pickFixApi.token)
-          
+          console.log(`in App,currentuser:`,currentUser)          
           setCurrentUser(currentUser);
         } catch (err) {
           console.error("Problem loading current user", err);

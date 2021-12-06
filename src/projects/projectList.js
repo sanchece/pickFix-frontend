@@ -13,19 +13,14 @@ const ProjectList=()=>{
     const [projects,setProjects]=useState(null)
 
     useEffect(()=>{
-        console.log("1 in projects(currentUser): ",currentUser)
          loadProjects();
-        console.log("3 loading************", projects)
     },[])
 
     async function loadProjects(){
         let getProjects=await pickFixApi.getProjects(id,userType)
-        console.log("getProjects",getProjects.length)
-
          if(getProjects.length>0){
             setProjects(getProjects);
         } 
-        console.log("2 projects: ", projects)
     }
   if(!projects) {
       return <div>no projects</div>
