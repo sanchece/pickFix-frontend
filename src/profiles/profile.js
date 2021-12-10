@@ -6,6 +6,8 @@ import pickFixApi from "../api";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
+
+
 const localizer = momentLocalizer(moment);
 
 const Profile = () => {
@@ -16,7 +18,7 @@ const Profile = () => {
     loadEvents()
   }, []);
   async function loadEvents() {
-    let getEvents = await pickFixApi.getEvents(currentUser.id, currentUser.userType );
+    let getEvents = await pickFixApi.getProjects(currentUser.id, currentUser.userType );
     if (getEvents.length > 0) {
       mountEventsToCalendar(getEvents);
       setEvents(calEvents);
@@ -29,15 +31,15 @@ const Profile = () => {
       const momentEvent = {
         start: momentStartTime._d,
         end: momentEndTime._d,
-        title: event.title,
+        title: `${event.title} - ${event.status}`,
       };
       calEvents.push(momentEvent);
     });
   }
-
   return (
     <div>
       <div>
+   
         <Calendar
           localizer={localizer}
           events={events}

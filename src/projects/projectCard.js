@@ -1,5 +1,4 @@
-import { Switch, Route } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 
 const ProjectCard=(props)=>{
     return(
@@ -10,6 +9,7 @@ const ProjectCard=(props)=>{
         <div>Budget:{props.budget}</div>
         <div>Customer:{props.customer_id}</div>
         <div>Contractor:{props.contractor_id}</div>
+        <Link to={`/projects/${props.project_id}`} > Chat</Link>
       </div>  
     )
 

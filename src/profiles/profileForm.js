@@ -16,8 +16,7 @@ const ProfileForm = () => {
     password:""
   });
   async function handleSubmit(e) {
-    e.preventDefault();    
-  
+    e.preventDefault();
     console.log("formData:",formData)
     console.log("curruserid:",currentUser.id)
     let res = await pickFixApi.updateUser(currentUser.id,formData);

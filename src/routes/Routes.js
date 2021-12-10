@@ -7,6 +7,7 @@ import ProjectList from "../projects/projectList";
 import ProjectForm from "../projects/projectForm";
 import ContractorList from "../explore/contractorList";
 import ContractorDetails from "../explore/contractorDetails";
+import ProjectChat from "../projects/projectChat"
 
 const Routes = ({ signUp, logIn }) => {
   return (
@@ -25,6 +26,9 @@ const Routes = ({ signUp, logIn }) => {
       </Route>
       <Route exact path="/projects">
         <ProjectList />
+      </Route>
+      <Route exact path="/projects/:id">
+        <ProjectChat />
       </Route>
       <Route exact path="/project-form">
         <ProjectForm />

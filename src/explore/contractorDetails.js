@@ -4,53 +4,48 @@ import pickFixApi from "../api";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
+import RequestProjectForm from "./requestProjectForm";
 const localizer = momentLocalizer(moment);
 
 const ContractorDetails = () => {
   const { id } = useParams();
-  // const calEvents = [];
   const [events, setEvents] = useState([]);
   useEffect(() => {
     loadEvents();
-    
   }, []);
 
   async function loadEvents() {
-    let getEvents = await pickFixApi.getEvents(id, "contractors");
+    let getEvents = await pickFixApi.getProjects(id, "contractors");
     if (getEvents.length > 0) {
       mountEventsToCalendar(getEvents);
-      // setEvents(calEvents);  ////***** why works here
-
     }
+
   }
    function mountEventsToCalendar(getEvents) {
     getEvents.map((event) => {
-      const momentStartTime = moment(event.start_time, "YYYY-MM-DD hh:mm:ss a");
-      const momentEndTime = moment(event.end_time, "YYYY-MM-DD hh:mm:ss a");
-      const momentEvent = {
-        start: momentStartTime._d,
-        end: momentEndTime._d,
-        title: event.title,
-      };
-
-      console.log("moment event:", momentEvent)
-      setEvents((data)=>(
-        [...data, momentEvent]
-      ))
-
-
-
-      // calEvents.push(momentEvent);
+      if(event.status!=="REQUESTED"){
+        const momentStartTime = moment(event.start_time, "YYYY-MM-DD hh:mm:ss a");
+        const momentEndTime = moment(event.end_time, "YYYY-MM-DD hh:mm:ss a");
+        const momentEvent = {
+          start: momentStartTime._d,
+          end: momentEndTime._d,
+          title: event.title,
+        };
+        console.log("moment event:", momentEvent)
+        setEvents((data)=>(
+          [...data, momentEvent]
+        ))
+      }
     });
-
   }
   if (events.length===0) {
     return <div> no events</div>;
   }
   return (
     <div>
+      <RequestProjectForm contractor_id={id} />
       <div>
-        events:
+        Availability:
         <Calendar
           localizer={localizer}
           events={events}

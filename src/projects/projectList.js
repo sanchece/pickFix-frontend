@@ -32,6 +32,7 @@ const ProjectList=()=>{
             {projects.map(project=>{
                 return(
                 <ProjectCard 
+                    project_id={project.id}
                     title={project.title}            
                     description={project.description}            
                     status={project.status}            
