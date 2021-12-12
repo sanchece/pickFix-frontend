@@ -6,29 +6,42 @@ const SignUpForm = ({ signUp }) => {
   const history = useHistory();
 
   const [signUpData, setSignUpData] = useState({
-    firstname:"",
-    lastname:"",
-    email:"",
-    password:"",
-    userType:"customers"  
+    firstname: "",
+    lastname: "",
+    email: "",
+    password: "",
+    userType: "customers",
   });
   async function handleSubmit(e) {
     e.preventDefault();
-
     let res = await signUp(signUpData);
     if (res.success) {
       console.log("success");
-      history.push("/profile")
+      history.push("/profile");
     }
+    else{
+      alert("This email already has an account")
+    }
+      
+  
   }
-  async function handleChange(e){
-    const { name, value } = e.target;    
-    console.log(signUpData)
+  async function handleChange(e) {
+    const { name, value } = e.target;
+    if(value==="contractors"){
+      console.log("selected contractors");
+      setSignUpData((data)=>({
+        ...data, name:""
+      }))
+    }
+    else if(value==="customers"){
+      delete signUpData.name;
+    }
+    console.log(signUpData);
     setSignUpData((data) => ({ ...data, [name]: value }));
   }
 
   return (
-    <form onSubmit={handleSubmit} >
+    <form onSubmit={handleSubmit}>
       {Object.keys(signUpData).map((key, i) => {
         if (key !== "userType") {
           return (
@@ -38,7 +51,7 @@ const SignUpForm = ({ signUp }) => {
                 id={`${key}`}
                 name={`${key}`}
                 value={signUpData[key]}
-                  onChange={handleChange}
+                onChange={handleChange}
               />
             </div>
           );

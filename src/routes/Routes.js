@@ -7,40 +7,48 @@ import ProjectList from "../projects/projectList";
 import ProjectForm from "../projects/projectForm";
 import ContractorList from "../explore/contractorList";
 import ContractorDetails from "../explore/contractorDetails";
-import ProjectChat from "../projects/projectChat"
+import ProjectChat from "../projects/projectChat";
+import PrivateRoute from "./PrivateRoute"
+import RequestList from "../requests/requestList";
+import Homepage from "../homepage";
 
 const Routes = ({ signUp, logIn }) => {
   return (
     <Switch>
+
+      <Route exact path="/">
+      <Homepage></Homepage>
+      </Route>
       <Route exact path="/login">
         <LogInForm logIn={logIn} />
       </Route>
       <Route exact path="/signup">
         <SignUpForm signUp={signUp} />
       </Route>
-      <Route path="/profile">
+      <PrivateRoute path="/profile">
         <Profile />
-      </Route>
-      <Route path="/profile-form">
+      </PrivateRoute>
+      <PrivateRoute path="/profile-form">
         <ProfileForm />
-      </Route>
-      <Route exact path="/projects">
+      </PrivateRoute>
+      <PrivateRoute exact path="/projects">
         <ProjectList />
-      </Route>
-      <Route exact path="/projects/:id">
+      </PrivateRoute>
+      <PrivateRoute exact path="/projects/:id">
         <ProjectChat />
-      </Route>
-      <Route exact path="/project-form">
+      </PrivateRoute>
+      <PrivateRoute exact path="/project-form">
         <ProjectForm />
-      </Route>
-      <Route exact path="/explore">
+      </PrivateRoute>
+      <PrivateRoute exact path="/explore">
         <ContractorList />
-      </Route>
-      <Route exact path="/explore/:id">
+      </PrivateRoute>
+      <PrivateRoute exact path="/requests">
+        <RequestList />
+      </PrivateRoute>
+      <PrivateRoute exact path="/explore/:id">
         <ContractorDetails />
-      </Route>
-
-
+      </PrivateRoute>
     </Switch>
   );
 };

@@ -42,6 +42,10 @@ class pickFixApi{
       let res= await this.request(`projects/${id}`) ;
       return res;
     }
+    static async updateProject(id,data){
+      let res= await this.request(`projects/${id}`,data, "patch") ;
+      return res;
+    }
     static async getProjectChat(id){
       let res= await this.request(`projects/chat/${id}`) 
       return res.chat;
@@ -51,9 +55,7 @@ class pickFixApi{
       let res= await this.request(`projects/chat/${id}`,data,"post")
       console.log("2 api add Chat:", res)
     }
-    static async getContractors(data){
-
-      
+    static async getContractors(data){     
       let res= await this.request(`users/contractors`,data,"post");
       console.log("api get contractors: ", res)
       return res;

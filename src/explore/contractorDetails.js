@@ -19,27 +19,29 @@ const ContractorDetails = () => {
     if (getEvents.length > 0) {
       mountEventsToCalendar(getEvents);
     }
-
   }
-   function mountEventsToCalendar(getEvents) {
+  function mountEventsToCalendar(getEvents) {
     getEvents.map((event) => {
-      if(event.status!=="REQUESTED"){
-        const momentStartTime = moment(event.start_time, "YYYY-MM-DD hh:mm:ss a");
+      if (event.status !== "REQUESTED") {
+        const momentStartTime = moment(
+          event.start_time,
+          "YYYY-MM-DD hh:mm:ss a"
+        );
         const momentEndTime = moment(event.end_time, "YYYY-MM-DD hh:mm:ss a");
         const momentEvent = {
           start: momentStartTime._d,
           end: momentEndTime._d,
           title: event.title,
         };
-        console.log("moment event:", momentEvent)
-        setEvents((data)=>(
-          [...data, momentEvent]
-        ))
+        console.log("moment event:", momentEvent);
+        setEvents((data) => [...data, momentEvent]);
       }
     });
   }
-  if (events.length===0) {
-    return <div> no events</div>;
+  if (events.length === 0) {
+    return <div> no events
+       <RequestProjectForm contractor_id={id} />
+    </div>;
   }
   return (
     <div>

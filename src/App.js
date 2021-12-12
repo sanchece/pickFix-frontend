@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Link } from "react-router-dom";
 import Routes from "./routes/Routes";
-import Navbar from "./routes/Navbar";
+import Navigation from "./routes/Navbar";
 import useLocalStorage from "./customHooks/useLocalStorage";
 import jwt from "jsonwebtoken";
 import pickFixApi from "./api";
@@ -17,7 +17,6 @@ function App() {
   const [myLocation, setMyLocation] = useState(null);
 
   useEffect(() => {
-  
     async function mountUser() {
       if (token) {
         console.log("token found & decoded:", jwt.decode(token));
@@ -58,7 +57,8 @@ function App() {
   async function signUp(data) {
     try {
       let res = await pickFixApi.signUp(data);
-      setToken(res);
+      console.log("sign up res", res)
+       setToken(res);
       return { success: true };
     } catch (err) {
       return { success: false, err };
@@ -67,6 +67,7 @@ function App() {
   async function logIn(data) {
     try {
       let res = await pickFixApi.logIn(data);
+      // console.log("App login  res", res)
       setToken(res);
       return { success: true, res: res };
     } catch (err) {
@@ -84,9 +85,9 @@ function App() {
 
   return (
     <BrowserRouter>
-      <UserContext.Provider value={{ currentUser, setCurrentUser, myLocation }}>
+      <UserContext.Provider value={{ currentUser, token, setCurrentUser, myLocation }}>
         <div>
-          <Navbar logOut={logOut} />
+          <Navigation logOut={logOut} />
           <Routes signUp={signUp} logIn={logIn} />
 
         </div>

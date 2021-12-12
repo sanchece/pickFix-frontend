@@ -9,6 +9,8 @@ const ProjectCard=(props)=>{
         <div>Budget:{props.budget}</div>
         <div>Customer:{props.customer_id}</div>
         <div>Contractor:{props.contractor_id}</div>
+        <div>Start Time:{props.start_time}</div>
+        <div>End Time:{props.end_time}</div>
         <Link to={`/projects/${props.project_id}`} > Chat</Link>
       </div>  
     )

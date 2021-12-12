@@ -11,10 +11,11 @@ const LogInForm = ({ logIn }) => {
   async function handleSubmit(e) {
     e.preventDefault();
     let res = await logIn(logInData);
-    console.log("loginForm res: ",res);
     if (res.success) {
-        console.log("successful login")
       history.push("/profile")
+    }
+    else{
+      alert("Incorrect Email/Password/UserType")
     }
   }
   async function handleChange(e){

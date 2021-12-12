@@ -1,47 +1,83 @@
 import React, { useContext } from "react";
 import UserContext from "../userContext";
 import { NavLink } from "react-router-dom";
+import {
+  Navbar,
+  Nav,
+  Container,
+  Offcanvas,
+  NavDropdown,
+  Form,
+  FormControl,
+  Button,
+} from "react-bootstrap/";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-const Navbar = ({ logOut }) => {
+const Navigation = ({ logOut }) => {
   const { currentUser } = useContext(UserContext);
   function loggedIn() {
-    return (
-      <ul>
-        <h3>pickFix</h3>
-        <li>
-          <NavLink to="/explore">Explore</NavLink>
-        </li>
-        <li>
-          <NavLink to="/projects">Projects</NavLink>
-        </li>
-        <li>
-          <NavLink to="/profile">Profile</NavLink>
-        </li>
-        <li>
-          <NavLink to="/" onClick={logOut}>Log Out</NavLink>
-        </li>
-      </ul>
-    );
+    if (currentUser.userType == "customers") {
+      return (
+        <Container fluid>
+          <Navbar.Brand href="/">pickFix</Navbar.Brand>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="me-auto">
+              <Nav.Link href="/explore">Explore</Nav.Link>
+              <Nav.Link href="/requests">Requests</Nav.Link>
+              <Nav.Link href="/projects">Projects</Nav.Link>
+              <Nav.Link href="/profile">Profile</Nav.Link>
+            </Nav>
+            <Nav>
+              <Nav.Link className="me-auto" onClick={logOut}>
+                Log Out
+              </Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      );
+    } else {
+      return (
+        <Container fluid>
+          <Navbar.Brand href="/">pickFix</Navbar.Brand>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="me-auto">
+              <Nav.Link href="/requests">Requests</Nav.Link>
+              <Nav.Link href="/projects">Projects</Nav.Link>
+              <Nav.Link href="/profile">Profile</Nav.Link>
+            </Nav>
+            <Nav>
+              <Nav.Link className="me-auto" onClick={logOut}>
+                Log Out
+              </Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      );
+    }
   }
   function loggedOut() {
     return (
-      <ul>
-        <h3>pickFix</h3>
-        <li>
-          <NavLink to="/login">Log In</NavLink>
-        </li>
-        <li>
-          <NavLink to="/signup">Sign Up</NavLink>
-        </li>
-      </ul>
+      <Container fluid>
+      <Navbar.Brand href="/">pickFix</Navbar.Brand>
+      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+      <Navbar.Collapse id="responsive-navbar-nav">
+      <Nav className="me">
+          <Nav.Link href="/login">Log In</Nav.Link>
+          <Nav.Link href="/signup">Sign Up</Nav.Link>
+        </Nav>
+      </Navbar.Collapse>
+    </Container>
+
     );
   }
 
   return (
-    <nav className="Navigation navbar navbar-expand-md">
+    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       {currentUser ? loggedIn() : loggedOut()}
-    </nav>
+    </Navbar>
   );
 };
 
-export default Navbar;
+export default Navigation;
