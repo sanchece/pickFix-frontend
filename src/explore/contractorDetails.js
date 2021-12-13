@@ -5,6 +5,8 @@ import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import RequestProjectForm from "./requestProjectForm";
+import { Container, Card, Row, Col, Button } from "react-bootstrap/";
+import "bootstrap/dist/css/bootstrap.min.css";
 const localizer = momentLocalizer(moment);
 
 const ContractorDetails = () => {
@@ -32,31 +34,64 @@ const ContractorDetails = () => {
           start: momentStartTime._d,
           end: momentEndTime._d,
           title: event.title,
+          project_id:"2"
         };
         console.log("moment event:", momentEvent);
         setEvents((data) => [...data, momentEvent]);
       }
     });
   }
+
+ 
+  
   if (events.length === 0) {
-    return <div> no events
-       <RequestProjectForm contractor_id={id} />
-    </div>;
+    return (
+      <Container fluid>
+        <Row>
+          <Col md={3}></Col>
+          <Col md={6}>
+            <Card.Title className="d-flex mb-3 justify-content-center">
+              Project Request Form
+            </Card.Title>
+            <Card className="p-2" style={{ width: "100%" }}>
+              <Card.Header>
+                <RequestProjectForm contractor_id={id} />
+              </Card.Header>
+            </Card>
+          </Col>
+          <Col md={3}></Col>
+        </Row>
+      </Container>
+    );
   }
   return (
-    <div>
-      <RequestProjectForm contractor_id={id} />
-      <div>
-        Availability:
-        <Calendar
-          localizer={localizer}
-          events={events}
-          startAccessor="start"
-          endAccessor="end"
-          style={{ height: 400 }}
-        />
-      </div>
-    </div>
+    <Container fluid>
+      <Row>
+        <Col md={3}></Col>
+        <Col md={6}>
+          <Card.Title className="d-flex mb-3 justify-content-center">
+            Project Request Form
+          </Card.Title>
+          <Card className="p-2" style={{ width: "100%" }}>
+            <Card.Header>
+              <RequestProjectForm contractor_id={id} />
+            </Card.Header>
+            <Card.Title className="d-flex mb-3 justify-content-center">
+              Schedule
+            </Card.Title>
+            <Calendar
+              localizer={localizer}
+              events={events}
+              startAccessor="start"
+              endAccessor="end"
+              style={{ height: 500 }}
+             
+            />
+          </Card>
+        </Col>
+        <Col md={3}></Col>
+      </Row>
+    </Container>
   );
 };
 

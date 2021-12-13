@@ -4,6 +4,8 @@ import pickFixApi from "../api";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import ProjectCard from "../projects/projectCard"
+import { Card, Container, Row, Col, Button, Stack,  InputGroup, Form, FormControl } from "react-bootstrap/";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const ProjectList=()=>{
     const { currentUser } = useContext(UserContext);
@@ -33,9 +35,14 @@ const ProjectList=()=>{
   }
 
     return(
-        <div>
-            in projects 
-            {projects.map(project=>{
+        <Container fluid>
+               <Card.Title className="d-flex mb-3 justify-content-center">
+                Projects
+              </Card.Title> 
+            <Row>
+                <Col md={4}></Col>
+                <Col md={4}>
+                {projects.map(project=>{
                 return(
                 <ProjectCard 
                     project_id={project.id}
@@ -43,14 +50,17 @@ const ProjectList=()=>{
                     description={project.description}            
                     status={project.status}            
                     budget={project.budget}            
-                    customer_id={project.customer_id}            
-                    contractor_id={project.contractor_id}  
+                    name={project.name}  
+                    customer={project.firstname}          
                     start_time={moment(project.start_time).format("llll")}            
-                    end_time={moment(project.end_time).format("llll")}                 
+                    end_time={moment(project.end_time).format("llll")}            
                 />)
             })}
-            <Link to="project-form">Add Project</Link>
-        </div>
+                </Col>
+                <Col md={4}></Col>
+            </Row>
+             
+        </Container>
     )
 }
 export default ProjectList;

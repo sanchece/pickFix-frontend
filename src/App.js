@@ -6,9 +6,9 @@ import useLocalStorage from "./customHooks/useLocalStorage";
 import jwt from "jsonwebtoken";
 import pickFixApi from "./api";
 import UserContext from "./userContext";
-
+import { Container } from "react-bootstrap/";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles.css";
-import GoogleMap  from "google-map-react";
 
 function App() {
   const [infoLoaded, setInfoLoaded] = useState(false);
@@ -21,13 +21,16 @@ function App() {
       if (token) {
         console.log("token found & decoded:", jwt.decode(token));
         try {
+
           getUserLocation();
           let { id, userType } = jwt.decode(token);
           pickFixApi.token = token;
           let currentUser = await pickFixApi.getCurrentUser(id, userType);
           currentUser["userType"] = userType;
-          console.log(`in App,currentuser:`, currentUser);
+          console.log(`in App,myLocation:`, myLocation);
           setCurrentUser(currentUser);
+   
+
         } catch (err) {
           console.error("Problem loading current user", err);
           setCurrentUser(null);
@@ -41,17 +44,26 @@ function App() {
     mountUser();
   }, [token]);
 
-  function getUserLocation() {
-    // navigator.geolocation.getCurrentPosition(function(position) {
-      // setMyLocation({
-      //   lat:position.coords.latitude,
-      //   lng: position.coords.longitude
-      // })
-    // });
-    setMyLocation({
-      lat:42.332,
-      lng: -83.057
-    })
+    function getUserLocation() {
+     navigator.geolocation.getCurrentPosition( async function(position) {
+       setMyLocation({
+        lat:position.coords.latitude,
+        lng: position.coords.longitude
+      })
+      let { id, userType } = jwt.decode(token);
+      let data={
+        lat:position.coords.latitude,
+        lng: position.coords.longitude,
+        userType:userType
+      }
+      let res = await pickFixApi.addLocation(data, id)
+
+    });
+
+    // setMyLocation({
+    //   lat:42.332,
+    //   lng: -83.057
+    // })
 
   }
   async function signUp(data) {
@@ -86,11 +98,11 @@ function App() {
   return (
     <BrowserRouter>
       <UserContext.Provider value={{ currentUser, token, setCurrentUser, myLocation }}>
-        <div>
+   
           <Navigation logOut={logOut} />
           <Routes signUp={signUp} logIn={logIn} />
 
-        </div>
+
       </UserContext.Provider>
     </BrowserRouter>
   );

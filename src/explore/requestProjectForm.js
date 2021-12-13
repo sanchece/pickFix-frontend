@@ -1,11 +1,25 @@
 import React, { useState, useContext, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+
 import capitalizeFirstLetter from "../common/capitalize";
 import UserContext from "../userContext";
 import pickFixApi from "../api";
 import DateTimePicker from "react-datetime-picker";
 import moment from "moment";
-
+import {
+  Container,
+  Card,
+  Row,
+  Col,
+  Button,
+  Form,
+  InputGroup,
+  FormControl,
+} from "react-bootstrap/";
+import "bootstrap/dist/css/bootstrap.min.css";
 const RequestProjectForm = ({ contractor_id }) => {
+  const history = useHistory();
+
   const { currentUser, setCurrentUser } = useContext(UserContext);
   const [projectData, setProjectData] = useState({
     title: "",
@@ -19,9 +33,6 @@ const RequestProjectForm = ({ contractor_id }) => {
   });
   const [startTime, handleStartTime] = useState(new Date());
   const [endTime, handleEndTime] = useState(new Date());
-  useEffect(() => {
-    console.log("requestProjectForm,projectData:", projectData);
-  });
 
   async function handleChange(e) {
     const { id, value } = e.target;
@@ -35,54 +46,65 @@ const RequestProjectForm = ({ contractor_id }) => {
     console.log(projectData);
     let res = await pickFixApi.addProject(projectData);
     console.log("res in requestProjectForm: ", res);
+    history.push("/requests");
   }
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        Project Request Form
+      <Form>
         {Object.keys(projectData).map((key, i) => {
           if (i < 5) {
-            if (key == "start_time" ) {
+            if (key == "start_time") {
               return (
-                <div>
-                  <label>{capitalizeFirstLetter(key)}: </label>
+                <InputGroup className="mb-1">
+                  <InputGroup.Text id="basic-addon1">
+                    {capitalizeFirstLetter(key)}:
+                  </InputGroup.Text>
                   <DateTimePicker
                     id={`${key}`}
                     name={`${key}`}
                     onChange={handleStartTime}
                     value={startTime}
                   />
-                </div>
+                </InputGroup>
               );
-            }
-            else if(key==="end_time"){
+            } else if (key === "end_time") {
               return (
-                <div>
-                  <label>{capitalizeFirstLetter(key)}: </label>
+                <InputGroup className="mb-1">
+                  <InputGroup.Text id="basic-addon1">
+                    {capitalizeFirstLetter(key)}:
+                  </InputGroup.Text>
                   <DateTimePicker
                     id={`${key}`}
                     name={`${key}`}
                     onChange={handleEndTime}
                     value={endTime}
                   />
-                </div>
+                </InputGroup>
               );
             }
             return (
               <div key={`${i}`}>
-                <label>{capitalizeFirstLetter(key)}: </label>
-                <input
-                  id={`${key}`}
-                  name={`${key}`}
-                  value={projectData[key]}
-                  onChange={handleChange}
-                />
+                <InputGroup className="mb-1">
+                  <InputGroup.Text id="basic-addon1">
+                    {capitalizeFirstLetter(key)}:
+                  </InputGroup.Text>
+                  <FormControl
+                    placeholder={`Enter ${capitalizeFirstLetter(key)} Here`}
+                    id={`${key}`}
+                    name={`${key}`}
+                    value={projectData[key]}
+                    onChange={handleChange}
+                  />
+                </InputGroup>
               </div>
             );
           }
         })}
-        <button> Submit</button>
-      </form>
+
+        <div className="d-grid gap-2">
+          <Button variant="success" onClick={handleSubmit}>Request Service</Button>
+        </div>
+      </Form>
     </div>
   );
 };

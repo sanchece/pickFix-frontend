@@ -6,21 +6,29 @@ import pickFixApi from "../api";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
+import { Container, Card, Row, Col, Button } from "react-bootstrap/";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { useHistory } from "react-router-dom";
 
 const localizer = momentLocalizer(moment);
 
 const Profile = () => {
+    const history = useHistory();
+
   const { currentUser } = useContext(UserContext);
   const [events, setEvents] = useState(null);
   const calEvents = [];
   useEffect(() => {
-    loadEvents()
+    loadEvents();
   }, [currentUser]);
   async function loadEvents() {
-    console.log("in load events", currentUser.userType)
-    let getEvents = await pickFixApi.getProjects(currentUser.id, currentUser.userType );
-   console.log(getEvents);
-    console.log("2in load events")
+    console.log("in load events", currentUser.userType);
+    let getEvents = await pickFixApi.getProjects(
+      currentUser.id,
+      currentUser.userType
+    );
+    console.log(getEvents);
+    console.log("2in load events");
 
     if (getEvents.length > 0) {
       mountEventsToCalendar(getEvents);
@@ -35,35 +43,67 @@ const Profile = () => {
         start: momentStartTime._d,
         end: momentEndTime._d,
         title: `${event.title} - ${event.status}`,
+        status: event.status
       };
       calEvents.push(momentEvent);
     });
   }
+
+  function handleClick(e){
+    console.log(e)
+    if(e.status=="REQUESTED"){
+      history.push("/requests")
+    }
+    else{
+      history.push("/projects")
+    }
+    // history.push("/projects");    
+  }
   return (
-    <div>
-      <div>
-        gps:
-        <gps />
-        <Calendar
-          localizer={localizer}
-          events={events}
-          startAccessor="start"
-          endAccessor="end"
-          style={{ height: 500 }}
-        />
-      </div>
-      {Object.keys(currentUser).map((key, i) => {
-        if (key === "id") {
-          return;
-        }
-        return (
-          <div key={`${i}`}>
-            {capitalizeFirstLetter(key)}:{currentUser[key]}
-          </div>
-        );
-      })}
-      <Link to="profile-form">Edit</Link>
-    </div>
+    <Container fluid>
+      <Row>
+        <Col md={3}></Col>
+        <Col md={6}>
+          <Card.Title className="d-flex mb-3 justify-content-center">
+            Profile
+          </Card.Title>
+          <Card style={{ width: "100%" }}>
+            <Card.Header>
+              {Object.keys(currentUser).map((key, i) => {
+                if (key === "id") {
+                  return;
+                }
+                return (
+                  <div key={`${i}`}>
+                    <b></b> {currentUser[key]}
+                  </div>
+                );
+              })}
+
+              <div className="d-grid gap-2">
+                <Button variant="primary" href="profile-form" size="lg">
+                  Edit
+                </Button>
+              </div>
+            </Card.Header>
+            <Card.Body>
+              <Card.Title className="d-flex  justify-content-center">
+                Schedule
+              </Card.Title>
+              <Calendar
+                localizer={localizer}
+                events={events}
+                startAccessor="start"
+                endAccessor="end"
+                onSelectEvent={handleClick}
+                style={{ height: 550 }}
+              />
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col md={3}></Col>
+      </Row>
+    </Container>
   );
 };
 

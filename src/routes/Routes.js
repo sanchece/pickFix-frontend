@@ -1,4 +1,5 @@
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route , Redirect} from "react-router-dom";
+import React, { useContext } from "react";
 import LogInForm from "../Forms/LogInForm";
 import SignUpForm from "../Forms/SignUpForm";
 import Profile from "../profiles/profile";
@@ -11,12 +12,16 @@ import ProjectChat from "../projects/projectChat";
 import PrivateRoute from "./PrivateRoute"
 import RequestList from "../requests/requestList";
 import Homepage from "../homepage";
+import UserContext from "../userContext";
 
 const Routes = ({ signUp, logIn }) => {
+  const { currentUser } = useContext(UserContext);
+
   return (
     <Switch>
 
       <Route exact path="/">
+        {currentUser? <ContractorList />: <Redirect to="/login"/>}
       <Homepage></Homepage>
       </Route>
       <Route exact path="/login">

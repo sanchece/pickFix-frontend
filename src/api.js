@@ -70,6 +70,12 @@ class pickFixApi{
       console.log("api addProject:", res)
       return res;
     }
+    static async addLocation(data,id){
+
+      let res= await this.request(`location/add/${id}`,data, "post");
+      console.log("api addProject:", res)
+      return res;
+    }
 }
 
 export default pickFixApi;

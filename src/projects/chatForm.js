@@ -2,7 +2,20 @@ import { useState, useContext, useEffect } from "react";
 import UserContext from "../userContext";
 import moment from "moment";
 import pickFixApi from "../api";
-
+import {
+  Card,
+  Container,
+  Row,
+  Col,
+  Button,
+  Stack,
+  InputGroup,
+  FormControl,
+  Dropdown,
+  DropdownButton,
+  Form,
+} from "react-bootstrap/";
+import "bootstrap/dist/css/bootstrap.min.css";
 const ChatForm = ({ projectId, customerId, contractorId, addNewChat }) => {
   const { currentUser, setCurrentUser } = useContext(UserContext);
   const [newChat, setNewChat] = useState({
@@ -29,10 +42,20 @@ const ChatForm = ({ projectId, customerId, contractorId, addNewChat }) => {
   }
   return (
     <form onSubmit={handleSubmit}>
-      <div>
-        <input id="chat" name="chat" onChange={handleChange} />
-      </div>
-      <button onSubmit={handleSubmit}> Send</button>
+   
+      <InputGroup className="mb-3">
+    <FormControl
+    name="chat"
+    value={newChat.chat}
+   onChange={handleChange}
+      placeholder="Recipient's username"
+      aria-label="Recipient's username"
+      aria-describedby="basic-addon2"
+    />
+    <Button onClick={handleSubmit} variant="outline-secondary" id="button-addon2">
+      Send
+    </Button>
+  </InputGroup>
     </form>
   );
 };

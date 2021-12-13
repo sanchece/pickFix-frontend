@@ -4,6 +4,8 @@ import pickFixApi from "../api";
 import { Link } from "react-router-dom";
 import RequestCard from "../requests/requestCard"
 import moment from "moment";
+import { Card, Container, Row, Col, Button, Stack,  InputGroup, Form, FormControl } from "react-bootstrap/";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const RequestList=()=>{
     const { currentUser } = useContext(UserContext);
@@ -20,6 +22,7 @@ const RequestList=()=>{
         let getProjects=await pickFixApi.getProjects(id,userType)
         console.log("requestList:", getProjects)
          if(getProjects.length>0){
+             getProjects= getProjects.reverse();
              getProjects.map((project,i)=>{
                  if(project.status!=="REQUESTED"){
                      delete getProjects[i];
@@ -33,9 +36,14 @@ const RequestList=()=>{
   }
 
     return(
-        <div>
-            in requests 
-            {projects.map(project=>{
+        <Container fluid>
+               <Card.Title className="d-flex mb-3 justify-content-center">
+                Requests
+              </Card.Title> 
+            <Row>
+                <Col md={4}></Col>
+                <Col md={4}>
+                {projects.map(project=>{
                 return(
                 <RequestCard 
                     project_id={project.id}
@@ -43,14 +51,16 @@ const RequestList=()=>{
                     description={project.description}            
                     status={project.status}            
                     budget={project.budget}            
-                    customer_id={project.customer_id}            
-                    contractor_id={project.contractor_id}            
+                    customer={project.firstname}          
                     start_time={moment(project.start_time).format("llll")}            
                     end_time={moment(project.end_time).format("llll")}            
                 />)
             })}
-       
-        </div>
+                </Col>
+                <Col md={4}></Col>
+            </Row>
+             
+        </Container>
     )
 }
 export default RequestList;

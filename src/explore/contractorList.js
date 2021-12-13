@@ -5,9 +5,7 @@ import ContractorCard from "../explore/contractorCard";
 
 import "../styles.css";
 import GoogleMap from "google-map-react";
-import {
- Row,Col
-} from "react-bootstrap/";
+import { Row, Col,Card } from "react-bootstrap/";
 import "bootstrap/dist/css/bootstrap.min.css";
 const ContractorList = () => {
   const { currentUser, myLocation } = useContext(UserContext);
@@ -16,6 +14,7 @@ const ContractorList = () => {
 
   useEffect(() => {
     loadContractors();
+    
   }, [currentUser]);
 
   async function loadContractors() {
@@ -32,13 +31,10 @@ const ContractorList = () => {
 
   async function handleClick(e) {
     const clickedContractor = e.target.id;
-    console.log("target", e.target.id);
+
     contractors.map((contractor) => {
-      console.log("22", contractor.id);
-      console.log("33", clickedContractor);
       if (contractor.id == clickedContractor) {
         setVisibleContractor([contractor]);
-        console.log("clicked", clickedContractor);
       }
     });
   }
@@ -46,43 +42,47 @@ const ContractorList = () => {
   if (!contractors) return <div>loading</div>;
   return (
     <container>
-
-
-    <div>
-      in contractors
-      {visibleContractor.map((contractor) => {
-        //  if(contractor.visible===true){
-        return (
-          <ContractorCard
-            name={contractor.name}
-            firstname={contractor.firstname}
-            lastname={contractor.lastname}
-            email={contractor.email}
-            id={contractor.id}
-          />
-        );
-        //  }
-      })}
-      <div style={{ height: "50vh", width: "50%" }}>
-        <GoogleMap
-          bootstrapURLKeys={{
-            key: "AIzaSyARetVWUyGyDHXDkZuWPtmv26Rh5vZpXRQ",
-          }}
-          defaultCenter={myLocation}
-          defaultZoom={11}
-        >
-          {contractors.map((contractor) => {
+      <Row>
+        <Col lg={2}></Col>
+        <Col lg={8}>
+        <Card.Title className="d-flex mb-3 justify-content-center">
+            Contractors near you
+          </Card.Title>
+          {visibleContractor.map((contractor) => {
+            //  if(contractor.visible===true){
             return (
-              <MyMarker
+              <ContractorCard
+                name={contractor.name}
+                firstname={contractor.firstname}
+                lastname={contractor.lastname}
+                email={contractor.email}
                 id={contractor.id}
-                lat={contractor.lat}
-                lng={contractor.lng}
               />
             );
+            //  }
           })}
-        </GoogleMap>
-      </div>
-    </div>
+          <div style={{ height: "60vh", width: "100%" }}>
+            <GoogleMap
+              bootstrapURLKeys={{
+                key: "AIzaSyARetVWUyGyDHXDkZuWPtmv26Rh5vZpXRQ",
+              }}
+              defaultCenter={myLocation}
+              defaultZoom={12}
+            >
+              {contractors.map((contractor) => {
+                return (
+                  <MyMarker
+                    id={contractor.id}
+                    lat={contractor.lat}
+                    lng={contractor.lng}
+                  />
+                );
+              })}
+            </GoogleMap>
+          </div>
+        </Col>
+        <Col lg={2}></Col>
+      </Row>
     </container>
   );
 };
