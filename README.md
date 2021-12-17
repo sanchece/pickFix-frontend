@@ -1,5 +1,12 @@
-# Getting Started with Create React App
+# pickFix Frontend  
+### URL
+> [Visit pickFix](https://sable-able.surge.sh/login)   
+### Overview
+> pickFix is an online web application that provides a platform for local service providers and customers to connect. Customers can explore local services based off their geographical location and availability. This platform allows customers to send project requests to contractors, where contractors can review, chat back and confirm project. 
+> This is the front end portion of the full stack pickFix web app. You can find the backend portion here: [pickFix Backend](https://github.com/sanchece/pickFix-backend). To have a fully functional full stack make sure to download both frontend and backend.
+> 
 
+## Getting Started with Create React App
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
