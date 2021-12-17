@@ -7,14 +7,7 @@ import {
   Card,
   Container,
   Row,
-  Col,
-  Button,
-  Stack,
-  InputGroup,
-  FormControl,
-  Dropdown,
-  DropdownButton,
-  Form,
+  Col
 } from "react-bootstrap/";
 import "bootstrap/dist/css/bootstrap.min.css";
 import UserContext from "../userContext";
@@ -47,7 +40,15 @@ const ProjectChat = () => {
     return <div>loading</div>;
   } else if (chats.length === 0) {
     return (
-      <div>
+      <Container fluid>
+      <Row>
+        <Col md={3}></Col>
+        <Col md={6}>
+          <Card.Title className="d-flex m-3 justify-content-center">
+            Chat
+          </Card.Title>
+          <Card className="mt-3" style={{ height: "80vh" }}>
+            <Card.Body>
         Say hi
         <ChatForm
           projectId={id}
@@ -55,7 +56,12 @@ const ProjectChat = () => {
           contractorId={project.contractor_id}
           addNewChat={addNewChat}
         />
-      </div>
+         </Card.Body>
+          </Card>
+        </Col>
+        <Col md={3}></Col>
+      </Row>
+    </Container>
     );
   }
 

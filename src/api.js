@@ -1,6 +1,6 @@
 import axios from "axios";
-// const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
-const BASE_URL = "http://localhost:3001";
+const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
+// const BASE_URL = "http://localhost:3001";
 class pickFixApi{
     static token;
     static async request(endpoint, data = {}, method = "get") {
@@ -71,7 +71,6 @@ class pickFixApi{
       return res;
     }
     static async addLocation(data,id){
-
       let res= await this.request(`location/add/${id}`,data, "post");
       console.log("api addProject:", res)
       return res;

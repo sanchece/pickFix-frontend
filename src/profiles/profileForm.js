@@ -57,37 +57,38 @@ const ProfileForm = () => {
     <Container className="d-flex  justify-content-center">
       <Row style={{ top: "20%", position: "absolute" }}>
         <Col>
-        <Card.Title className="d-flex mb-3 justify-content-center">
-                Update Profile
-              </Card.Title>
+          <Card.Title className="d-flex mb-3 justify-content-center">
+            Update Profile
+          </Card.Title>
           <Card>
-          <Card.Body>
-            <form onSubmit={handleSubmit}>
-              
-              {Object.keys(formData).map((key, i) => {
-                return (
-                  <div key={`${i}`}>
-                    <InputGroup className="mb-3">
-                      <InputGroup.Text id="basic-addon1">
-                        {capitalizeFirstLetter(key)}
-                      </InputGroup.Text>
-                      <FormControl
-                        placeholder={`Enter ${capitalizeFirstLetter(key)} Here`}
-                        id={`${key}`}
-                        name={`${key}`}
-                        value={formData[key]}
-                        onChange={handleChange}
-                      />
-                    </InputGroup>
-                  </div>
-                );
-              })}
-            
-              <div className="d-grid gap-2">
-              Retype Password for double authentication
-<Button  onClick={handleSubmit}>Update</Button>
-</div>
-            </form>
+            <Card.Body>
+              <form onSubmit={handleSubmit}>
+                {Object.keys(formData).map((key, i) => {
+                  return (
+                    <div key={`${i}`}>
+                      <InputGroup className="mb-3">
+                        <InputGroup.Text id="basic-addon1">
+                          {capitalizeFirstLetter(key)}
+                        </InputGroup.Text>
+                        <FormControl
+                          placeholder={`Enter ${capitalizeFirstLetter(
+                            key
+                          )} Here`}
+                          id={`${key}`}
+                          name={`${key}`}
+                          value={formData[key]}
+                          onChange={handleChange}
+                        />
+                      </InputGroup>
+                    </div>
+                  );
+                })}
+
+                <div className="d-grid gap-2">
+                  Retype Password for double authentication
+                  <Button onClick={handleSubmit}>Update</Button>
+                </div>
+              </form>
             </Card.Body>
           </Card>
         </Col>

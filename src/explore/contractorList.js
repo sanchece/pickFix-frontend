@@ -5,7 +5,7 @@ import ContractorCard from "../explore/contractorCard";
 
 import "../styles.css";
 import GoogleMap from "google-map-react";
-import { Row, Col,Card } from "react-bootstrap/";
+import { Row, Col, Card, Container } from "react-bootstrap/";
 import "bootstrap/dist/css/bootstrap.min.css";
 const ContractorList = () => {
   const { currentUser, myLocation } = useContext(UserContext);
@@ -14,7 +14,6 @@ const ContractorList = () => {
 
   useEffect(() => {
     loadContractors();
-    
   }, [currentUser]);
 
   async function loadContractors() {
@@ -31,7 +30,6 @@ const ContractorList = () => {
 
   async function handleClick(e) {
     const clickedContractor = e.target.id;
-
     contractors.map((contractor) => {
       if (contractor.id == clickedContractor) {
         setVisibleContractor([contractor]);
@@ -41,11 +39,11 @@ const ContractorList = () => {
 
   if (!contractors) return <div>loading</div>;
   return (
-    <container>
+    <Container>
       <Row>
         <Col lg={2}></Col>
         <Col lg={8}>
-        <Card.Title className="d-flex mb-3 justify-content-center">
+          <Card.Title className="d-flex mb-3 justify-content-center">
             Contractors near you
           </Card.Title>
           {visibleContractor.map((contractor) => {
@@ -83,7 +81,7 @@ const ContractorList = () => {
         </Col>
         <Col lg={2}></Col>
       </Row>
-    </container>
+    </Container>
   );
 };
 export default ContractorList;

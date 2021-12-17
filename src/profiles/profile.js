@@ -13,8 +13,7 @@ import { useHistory } from "react-router-dom";
 const localizer = momentLocalizer(moment);
 
 const Profile = () => {
-    const history = useHistory();
-
+  const history = useHistory();
   const { currentUser } = useContext(UserContext);
   const [events, setEvents] = useState(null);
   const calEvents = [];
@@ -43,21 +42,19 @@ const Profile = () => {
         start: momentStartTime._d,
         end: momentEndTime._d,
         title: `${event.title} - ${event.status}`,
-        status: event.status
+        status: event.status,
       };
       calEvents.push(momentEvent);
     });
   }
 
-  function handleClick(e){
-    console.log(e)
-    if(e.status=="REQUESTED"){
-      history.push("/requests")
+  function handleClick(e) {
+    console.log(e);
+    if (e.status == "REQUESTED") {
+      history.push("/requests");
+    } else {
+      history.push("/projects");
     }
-    else{
-      history.push("/projects")
-    }
-    // history.push("/projects");    
   }
   return (
     <Container fluid>

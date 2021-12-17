@@ -1,16 +1,6 @@
 import { Link } from "react-router-dom";
 import React, { useContext } from "react";
-import {
-  Card,
-  Container,
-  Row,
-  Col,
-  Button,
-  Stack,
-  InputGroup,
-  Form,
-  FormControl,
-} from "react-bootstrap/";
+import { Card, Button } from "react-bootstrap/";
 import "bootstrap/dist/css/bootstrap.min.css";
 import pickFixApi from "../api";
 import UserContext from "../userContext";
@@ -60,19 +50,18 @@ const RequestCard = (props) => {
           <div>Start Time: {props.start_time}</div>
           <div>End Time:{props.end_time}</div>
           <div className="d-grid gap-2">
-          <Button variant="primary" href={`/projects/${props.project_id}`}>
-            Chat
-          </Button>
+            <Button variant="primary" href={`/projects/${props.project_id}`}>
+              Chat
+            </Button>
 
-          <Button variant="success" href={handleAccept}>
-            Accept
-          </Button>
+            <Button variant="success" href={handleAccept}>
+              Accept
+            </Button>
 
-          <Button variant="danger" href={handleDecline}>
-            Decline
-          </Button>
-        </div>
-
+            <Button variant="danger" href={handleDecline}>
+              Decline
+            </Button>
+          </div>
         </Card.Body>
       </Card>
     );

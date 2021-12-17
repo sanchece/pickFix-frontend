@@ -41,8 +41,8 @@ const RequestList=()=>{
                 Requests
               </Card.Title> 
             <Row>
-                <Col md={4}></Col>
-                <Col md={4}>
+                <Col lg={4}></Col>
+                <Col lg={4}>
                 {projects.map(project=>{
                 return(
                 <RequestCard 
@@ -57,7 +57,7 @@ const RequestList=()=>{
                 />)
             })}
                 </Col>
-                <Col md={4}></Col>
+                <Col lg={4}></Col>
             </Row>
              
         </Container>

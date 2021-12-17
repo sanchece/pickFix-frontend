@@ -21,7 +21,6 @@ function App() {
       if (token) {
         console.log("token found & decoded:", jwt.decode(token));
         try {
-
           getUserLocation();
           let { id, userType } = jwt.decode(token);
           pickFixApi.token = token;
@@ -29,8 +28,6 @@ function App() {
           currentUser["userType"] = userType;
           console.log(`in App,myLocation:`, myLocation);
           setCurrentUser(currentUser);
-   
-
         } catch (err) {
           console.error("Problem loading current user", err);
           setCurrentUser(null);
@@ -44,33 +41,32 @@ function App() {
     mountUser();
   }, [token]);
 
-    function getUserLocation() {
-     navigator.geolocation.getCurrentPosition( async function(position) {
-       setMyLocation({
-        lat:position.coords.latitude,
-        lng: position.coords.longitude
-      })
+  function getUserLocation() {
+    navigator.geolocation.getCurrentPosition(async function (position) {
+      setMyLocation({
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,        
+      });
       let { id, userType } = jwt.decode(token);
-      let data={
-        lat:position.coords.latitude,
+      let data = {
+        lat: position.coords.latitude,
         lng: position.coords.longitude,
-        userType:userType
-      }
-      let res = await pickFixApi.addLocation(data, id)
-
+        // lat: 1,
+        // lng: 2,
+        userType: userType,
+      };
+      let res = await pickFixApi.addLocation(data, id);
     });
-
     // setMyLocation({
     //   lat:42.332,
     //   lng: -83.057
     // })
-
   }
   async function signUp(data) {
     try {
       let res = await pickFixApi.signUp(data);
-      console.log("sign up res", res)
-       setToken(res);
+      console.log("sign up res", res);
+      setToken(res);
       return { success: true };
     } catch (err) {
       return { success: false, err };
@@ -92,17 +88,15 @@ function App() {
     setToken(null);
   }
 
-
   if (!infoLoaded) return <div> loading</div>;
 
   return (
     <BrowserRouter>
-      <UserContext.Provider value={{ currentUser, token, setCurrentUser, myLocation }}>
-   
-          <Navigation logOut={logOut} />
-          <Routes signUp={signUp} logIn={logIn} />
-
-
+      <UserContext.Provider
+        value={{ currentUser, token, setCurrentUser, myLocation }}
+      >
+        <Navigation logOut={logOut} />
+        <Routes signUp={signUp} logIn={logIn} />
       </UserContext.Provider>
     </BrowserRouter>
   );

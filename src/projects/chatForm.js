@@ -3,17 +3,9 @@ import UserContext from "../userContext";
 import moment from "moment";
 import pickFixApi from "../api";
 import {
-  Card,
-  Container,
-  Row,
-  Col,
   Button,
-  Stack,
   InputGroup,
   FormControl,
-  Dropdown,
-  DropdownButton,
-  Form,
 } from "react-bootstrap/";
 import "bootstrap/dist/css/bootstrap.min.css";
 const ChatForm = ({ projectId, customerId, contractorId, addNewChat }) => {
