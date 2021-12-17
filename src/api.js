@@ -1,6 +1,7 @@
 import axios from "axios";
-const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
+const BASE_URL = "https://pickfix-backend.herokuapp.com" || "http://localhost:3001";
 // const BASE_URL = "http://localhost:3001";
+// const BASE_URL = "https://pickfix-backend.herokuapp.com";
 class pickFixApi{
     static token;
     static async request(endpoint, data = {}, method = "get") {
@@ -23,6 +24,7 @@ class pickFixApi{
     }
     static async logIn(data){
         console.log("api logIn data: ",data)
+        console.log("2 BASE_URL: ",BASE_URL)
         let res= await this.request('users/login',data,"post");
         return res.token;
     }
