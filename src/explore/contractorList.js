@@ -7,6 +7,7 @@ import "../styles.css";
 import GoogleMap from "google-map-react";
 import { Row, Col, Card, Container } from "react-bootstrap/";
 import "bootstrap/dist/css/bootstrap.min.css";
+const google_map_key= ""
 const ContractorList = () => {
   const { currentUser, myLocation } = useContext(UserContext);
   const [contractors, setContractors] = useState(null);
@@ -62,7 +63,7 @@ const ContractorList = () => {
           <div style={{ height: "60vh", width: "100%" }}>
             <GoogleMap
               bootstrapURLKeys={{
-                key: "AIzaSyARetVWUyGyDHXDkZuWPtmv26Rh5vZpXRQ",
+                key: google_map_key,
               }}
               defaultCenter={myLocation}
               defaultZoom={12}
