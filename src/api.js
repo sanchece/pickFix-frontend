@@ -1,6 +1,6 @@
 import axios from "axios";
-const BASE_URL = "https://pickfix-backend.herokuapp.com" || "http://localhost:3001";
-// const BASE_URL = "http://localhost:3001";
+// const BASE_URL = "https://pickfix-backend.herokuapp.com" || "http://localhost:3001";
+const BASE_URL = "http://localhost:3001";
 // const BASE_URL = "https://pickfix-backend.herokuapp.com";
 class pickFixApi{
     static token;

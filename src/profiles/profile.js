@@ -72,7 +72,7 @@ const Profile = () => {
                 }
                 return (
                   <div key={`${i}`}>
-                    <b></b> {currentUser[key]}
+                    <b>{capitalizeFirstLetter(key)}:</b> {currentUser[key]}
                   </div>
                 );
               })}
