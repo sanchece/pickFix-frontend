@@ -54,7 +54,6 @@ const LogInForm = ({ logIn }) => {
               <Card.Title className="d-flex mb-3 justify-content-center">
                 Log In
               </Card.Title>
-              <Card.Text>
                 <Form onSubmit={handleSubmit}>
                   {Object.keys(logInData).map((key, i) => {
                     if (key !== "userType" && key !=="password") {
@@ -120,7 +119,6 @@ const LogInForm = ({ logIn }) => {
                     <Button onClick={handleSubmit}>Log In</Button>
                   </div>
                 </Form>
-              </Card.Text>
             </Card.Body>
           </Card>
         </Col>

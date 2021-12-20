@@ -1,0 +1,130 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <nav
+    class="navbar navbar-expand-lg navbar-dark bg-dark"
+  >
+    <div
+      class="container-fluid"
+    >
+      <a
+        class="navbar-brand"
+        href="/"
+      >
+        pickFix
+      </a>
+      <button
+        aria-controls="responsive-navbar-nav"
+        aria-label="Toggle navigation"
+        class="navbar-toggler collapsed"
+        type="button"
+      >
+        <span
+          class="navbar-toggler-icon"
+        />
+      </button>
+      <div
+        class="navbar-collapse collapse"
+        id="responsive-navbar-nav"
+      >
+        <div
+          class="me-auto navbar-nav"
+        >
+          <a
+            class="nav-link"
+            data-rr-ui-event-key="/explore"
+            href="/explore"
+          >
+            Explore
+          </a>
+          <a
+            class="nav-link"
+            data-rr-ui-event-key="/requests"
+            href="/requests"
+          >
+            Requests
+          </a>
+          <a
+            class="nav-link"
+            data-rr-ui-event-key="/projects"
+            href="/projects"
+          >
+            Projects
+          </a>
+          <a
+            class="nav-link"
+            data-rr-ui-event-key="/profile"
+            href="/profile"
+          >
+            Profile
+          </a>
+        </div>
+        <div
+          class="navbar-nav"
+        >
+          <a
+            class="me-auto nav-link"
+            role="button"
+            tabindex="0"
+          >
+            Log Out
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+</DocumentFragment>
+`;
+
+exports[`matches snapshot when logged out 1`] = `
+<DocumentFragment>
+  <nav
+    class="navbar navbar-expand-lg navbar-dark bg-dark"
+  >
+    <div
+      class="container-fluid"
+    >
+      <a
+        class="navbar-brand"
+        href="/"
+      >
+        pickFix
+      </a>
+      <button
+        aria-controls="responsive-navbar-nav"
+        aria-label="Toggle navigation"
+        class="navbar-toggler collapsed"
+        type="button"
+      >
+        <span
+          class="navbar-toggler-icon"
+        />
+      </button>
+      <div
+        class="navbar-collapse collapse"
+        id="responsive-navbar-nav"
+      >
+        <div
+          class="me navbar-nav"
+        >
+          <a
+            class="nav-link"
+            data-rr-ui-event-key="/login"
+            href="/login"
+          >
+            Log In
+          </a>
+          <a
+            class="nav-link"
+            data-rr-ui-event-key="/signup"
+            href="/signup"
+          >
+            Sign Up
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+</DocumentFragment>
+`;

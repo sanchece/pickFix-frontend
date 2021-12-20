@@ -5,7 +5,7 @@ import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import RequestProjectForm from "./requestProjectForm";
-import { Container, Card, Row, Col, Button } from "react-bootstrap/";
+import { Container, Card, Row, Col } from "react-bootstrap/";
 import "bootstrap/dist/css/bootstrap.min.css";
 const localizer = momentLocalizer(moment);
 
@@ -40,10 +40,7 @@ const ContractorDetails = () => {
         setEvents((data) => [...data, momentEvent]);
       }
     });
-  }
-
- 
-  
+  }  
   if (events.length === 0) {
     return (
       <Container fluid>

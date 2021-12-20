@@ -1,0 +1,153 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="container-fluid"
+    style="margin: 100px 0px 0px 0px;"
+  >
+    <div
+      class="row"
+    >
+      <div
+        class="col-lg-4"
+      />
+      <div
+        class="col-lg-4"
+      >
+        <div
+          class="d-flex align-items-center justify-content-center card"
+        >
+          <div
+            class="card-body"
+          >
+            <div
+              class="d-flex mb-3 justify-content-center card-title h5"
+            >
+              Sign Up
+            </div>
+            <form
+              class=""
+            >
+              <div>
+                <div
+                  class="mb-3 input-group"
+                >
+                  <span
+                    class="input-group-text"
+                    id="basic-addon1"
+                  >
+                    Firstname
+                  </span>
+                  <input
+                    class="form-control"
+                    name="firstname"
+                    placeholder="Enter Firstname Here"
+                    value=""
+                  />
+                </div>
+              </div>
+              <div>
+                <div
+                  class="mb-3 input-group"
+                >
+                  <span
+                    class="input-group-text"
+                    id="basic-addon1"
+                  >
+                    Lastname
+                  </span>
+                  <input
+                    class="form-control"
+                    name="lastname"
+                    placeholder="Enter Lastname Here"
+                    value=""
+                  />
+                </div>
+              </div>
+              <div>
+                <div
+                  class="mb-3 input-group"
+                >
+                  <span
+                    class="input-group-text"
+                    id="basic-addon1"
+                  >
+                    Email
+                  </span>
+                  <input
+                    class="form-control"
+                    name="email"
+                    placeholder="Enter Email Here"
+                    value=""
+                  />
+                </div>
+              </div>
+              <div>
+                <div
+                  class="mb-3 input-group"
+                >
+                  <span
+                    class="input-group-text"
+                    id="basic-addon1"
+                  >
+                    Password
+                  </span>
+                  <input
+                    class="form-control"
+                    name="password"
+                    placeholder="Enter Password Here"
+                    type="password"
+                    value=""
+                  />
+                </div>
+              </div>
+              <div>
+                <div
+                  class="mb-3 input-group"
+                >
+                  <span
+                    class="input-group-text"
+                    id="basic-addon1"
+                  >
+                    UserType
+                  </span>
+                  <select
+                    class="form-select"
+                    id="userType"
+                    name="userType"
+                  >
+                    <option
+                      value="customers"
+                    >
+                      Customer
+                    </option>
+                    <option
+                      value="contractors"
+                    >
+                      Contractor
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div
+                class="d-grid gap-2"
+              >
+                <button
+                  class="btn btn-primary"
+                  type="button"
+                >
+                  Sign Up
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div
+        class="col-lg-4"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;

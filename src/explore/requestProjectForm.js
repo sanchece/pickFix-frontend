@@ -7,10 +7,6 @@ import pickFixApi from "../api";
 import DateTimePicker from "react-datetime-picker";
 import moment from "moment";
 import {
-  Container,
-  Card,
-  Row,
-  Col,
   Button,
   Form,
   InputGroup,
@@ -55,31 +51,35 @@ const RequestProjectForm = ({ contractor_id }) => {
           if (i < 5) {
             if (key == "start_time") {
               return (
-                <InputGroup className="mb-1">
-                  <InputGroup.Text id="basic-addon1">
-                    {capitalizeFirstLetter(key)}:
-                  </InputGroup.Text>
-                  <DateTimePicker
-                    id={`${key}`}
-                    name={`${key}`}
-                    onChange={handleStartTime}
-                    value={startTime}
-                  />
-                </InputGroup>
+                <div key={`${i}`}>
+                  <InputGroup className="mb-1">
+                    <InputGroup.Text id="basic-addon1">
+                      {capitalizeFirstLetter(key)}:
+                    </InputGroup.Text>
+                    <DateTimePicker
+                      id={`${key}`}
+                      name={`${key}`}
+                      onChange={handleStartTime}
+                      value={startTime}
+                    />
+                  </InputGroup>
+                </div>
               );
             } else if (key === "end_time") {
               return (
-                <InputGroup className="mb-1">
-                  <InputGroup.Text id="basic-addon1">
-                    {capitalizeFirstLetter(key)}:
-                  </InputGroup.Text>
-                  <DateTimePicker
-                    id={`${key}`}
-                    name={`${key}`}
-                    onChange={handleEndTime}
-                    value={endTime}
-                  />
-                </InputGroup>
+                <div key={`${i}`}>
+                  <InputGroup className="mb-1">
+                    <InputGroup.Text id="basic-addon1">
+                      {capitalizeFirstLetter(key)}:
+                    </InputGroup.Text>
+                    <DateTimePicker
+                      id={`${key}`}
+                      name={`${key}`}
+                      onChange={handleEndTime}
+                      value={endTime}
+                    />
+                  </InputGroup>
+                </div>
               );
             }
             return (
@@ -102,7 +102,9 @@ const RequestProjectForm = ({ contractor_id }) => {
         })}
 
         <div className="d-grid gap-2">
-          <Button variant="success" onClick={handleSubmit}>Request Service</Button>
+          <Button variant="success" onClick={handleSubmit}>
+            Request Service
+          </Button>
         </div>
       </Form>
     </div>

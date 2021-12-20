@@ -1,16 +1,6 @@
 import React, { useContext } from "react";
 import UserContext from "../userContext";
-import { NavLink } from "react-router-dom";
-import {
-  Navbar,
-  Nav,
-  Container,
-  Offcanvas,
-  NavDropdown,
-  Form,
-  FormControl,
-  Button,
-} from "react-bootstrap/";
+import { Navbar, Nav, Container } from "react-bootstrap/";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const Navigation = ({ logOut }) => {
@@ -60,16 +50,15 @@ const Navigation = ({ logOut }) => {
   function loggedOut() {
     return (
       <Container fluid>
-      <Navbar.Brand href="/">pickFix</Navbar.Brand>
-      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-      <Navbar.Collapse id="responsive-navbar-nav">
-      <Nav className="me">
-          <Nav.Link href="/login">Log In</Nav.Link>
-          <Nav.Link href="/signup">Sign Up</Nav.Link>
-        </Nav>
-      </Navbar.Collapse>
-    </Container>
-
+        <Navbar.Brand href="/">pickFix</Navbar.Brand>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="me">
+            <Nav.Link href="/login">Log In</Nav.Link>
+            <Nav.Link href="/signup">Sign Up</Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
     );
   }
 

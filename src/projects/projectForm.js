@@ -18,12 +18,12 @@ const ProfileForm = () => {
     e.preventDefault();
 
     console.log("formData:", formData);
-    // let res = await pickFixApi.updateUser(currentUser.id,formData);
-    // if (res) {
-    //   console.log("success");
-    //   setCurrentUser(res)
-    //  history.push("/profile")
-    // }
+    let res = await pickFixApi.updateUser(currentUser.id,formData);
+    if (res) {
+      console.log("success");
+      setCurrentUser(res)
+     history.push("/profile")
+    }
   }
   async function handleChange(e) {
     const { name, value } = e.target;

@@ -19,6 +19,7 @@ function App() {
   useEffect(() => {
     async function mountUser() {
       if (token) {
+        console.log("token", token)
         console.log("token found & decoded:", jwt.decode(token));
         try {
           getUserLocation();
@@ -26,6 +27,7 @@ function App() {
           pickFixApi.token = token;
           let currentUser = await pickFixApi.getCurrentUser(id, userType);
           currentUser["userType"] = userType;
+          console.log("currentUser", currentUser)
           console.log(`in App,myLocation:`, myLocation);
           setCurrentUser(currentUser);
         } catch (err) {
@@ -45,7 +47,7 @@ function App() {
     navigator.geolocation.getCurrentPosition(async function (position) {
       setMyLocation({
         lat: position.coords.latitude,
-        lng: position.coords.longitude,        
+        lng: position.coords.longitude,
       });
       let { id, userType } = jwt.decode(token);
       let data = {
@@ -82,14 +84,11 @@ function App() {
       return { success: false, err };
     }
   }
-
   function logOut() {
     setCurrentUser(null);
     setToken(null);
   }
-
   if (!infoLoaded) return <div> loading</div>;
-
   return (
     <BrowserRouter>
       <UserContext.Provider

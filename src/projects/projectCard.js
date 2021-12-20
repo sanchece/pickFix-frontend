@@ -1,14 +1,10 @@
-import { Link } from "react-router-dom";
-import React, { useContext } from "react";
-import UserContext from "../userContext";
+import React from "react";
 import {
   Card,
   Button,
 } from "react-bootstrap/";
 import "bootstrap/dist/css/bootstrap.min.css";
 const ProjectCard = (props) => {
-  const { currentUser } = useContext(UserContext);
-
   return (
     <Card bg="success" className="mb-1 p-1">
       <Card.Body>
