@@ -4,6 +4,9 @@
 ### Overview
 > pickFix is an online web application that provides a platform for local service providers and customers to connect. Customers can explore local services based on their geographical location and availability. Then customers can send project requests to contractors, where contractors can review, chat back and confirm or decline the project. 
  
+ ### Backend
+> This is full stack application where the backend is deployed elsewhere and can be found here: [pickFix-Backed](https://github.com/sanchece/pickFix-backend)  
+ 
 ### Features  
 >* <strong>Single-page Frontend React Application </strong>
 >* <strong>HTML Geolocation</strong> On login pickFix-frontend requests HTML Geolocation from the client and then sends it to pickFix-backend where it is stored in the pickfix-user_locations database.  
